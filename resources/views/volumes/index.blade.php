@@ -17,29 +17,33 @@
 
             <div class="bg-white p-6 shadow sm:rounded-lg">
 
-            <form action="{{route('volumes.index')}}"    method='GET' class="flex gap-2">
+                <form action="{{route('volumes.index')}}" method='GET' class="flex gap-2">
 
-                <input type="text" name="search" value="{{request('search')}}" placeholder="作品名で検索..." class="flex-1 border-gray-300 rounded-md">
+                    <input type="text" name="search" value="{{request('search')}}" placeholder="作品名で検索..." class="flex-1 border-gray-300 rounded-md">
 
-                <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md">
-                    検索
-                </button>
+                    <button type="submit" class="bg-brand-600 text-white px-4 py-2 rounded-md">
+                        検索
+                    </button>
 
-                @if(request('search'))
-                <a href="{{route('volumes.index')}}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">
-                    クリア
-                </a>
-                @endif
-                
-            </form>
+                    @if(request('search'))
+                    <a href="{{route('volumes.index')}}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">
+                        クリア
+                    </a>
+                    @endif
+                    
+                </form>
+           </div>
+
+           <div class="bg-white p-6 shadow sm:rounded-lg">
 
                 <h3 class="text-lg font-bold mb-4">巻を登録</h3>
 
                 @if ($seriesList->isEmpty())
                     <p class="text-gray-500">先に「作品」を登録してください。
-                        <a href="{{ route('series.index') }}" class="text-indigo-600 underline">作品登録ページへ</a>
+                        <a href="{{ route('series.index') }}" class="text-brand-600 underline">作品登録ページへ</a>
                     </p>
                 @else
+
                     <form method="POST" action="{{ route('volumes.store') }}" class="space-y-4">
 
                         @csrf
@@ -69,9 +73,11 @@
                             <label class="block text-sm font-medium text-gray-700">プラットフォーム</label>
 
                             <select name="platform_id" class="mt-1 block w-full border-gray-300 rounded-md">
+
                                 @foreach ($platforms as $platform)
                                     <option value="{{ $platform->id }}">{{ $platform->name }}</option>
                                 @endforeach
+
                             </select>
 
                             @error('platform_id')
@@ -93,11 +99,9 @@
                         </div>
 
                         <div>
-
                             <label class="block text-sm font-medium text-gray-700">購入日</label>
 
                             <input type="date" name="purchase_date" value="{{ old('purchase_date') }}" class="mt-1 block w-full border-gray-300 rounded-md">
-
                         </div>
 
                         <div>
@@ -119,7 +123,7 @@
 
                         </div>
 
-                        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md">登録する</button>
+                        <button type="submit" class="bg-brand-600 text-white px-4 py-2 rounded-md">登録する</button>
 
                     </form>
 
@@ -185,11 +189,15 @@
                                         </td>
                                         <td class="py-2">
                                             <div class="flex space-x-3 text-sm">
-                                                <a href="{{ route('volumes.edit', $volume->id) }}" class="text-indigo-600 hover:underline">編集</a>
+                                                <a href="{{ route('volumes.edit', $volume->id) }}" class="text-brand-600 hover:underline">
+                                                    編集
+                                                </a>
                                                 <form method="POST" action="{{ route('volumes.destroy', $volume->id) }}" onsubmit="return confirm('本当に削除しますか？');">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="text-red-600 hover:underline">削除</button>
+                                                    <button type="submit" class="text-red-600 hover:underline">
+                                                        削除
+                                                    </button>
                                                 </form>
                                             </div>
                                         </td>
@@ -206,7 +214,6 @@
                     @endif
                 @endforelse
             </div>
-
         </div>
     </div>
 </x-app-layout>

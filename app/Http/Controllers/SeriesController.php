@@ -33,7 +33,18 @@ class SeriesController extends Controller
             'title'=>'required|string|max:255',
             'author'=>'nullable|string|max:255',
             'genre'=>'nullable|string|max:255',
+            'cover_image'=>'nullable|image|max:2048',
         ]);
+
+        //実際にファイルが送られてきたかを確認
+        if($request->hasFile('cover_image')){
+            $path=$request->file('cover_image')->store('covers','public');
+            //データベースにはこの「パス文字列」だけを保存
+            $validated['cover_image_url']=$path;
+        }
+
+        //cover_image自体seriesテーブルに存在しないカラムなので、$validatedから取り除いてからcreate/updateに渡す
+        unset($validated['cover_image']);
 
         Series::create($validated);
 
@@ -68,7 +79,16 @@ class SeriesController extends Controller
             'title'=>'required|string|max:255',
             'author'=>'nullable|string|max:255',
             'genre'=>'nullable|string|max:255',
+            'cover_image' => 'nullable|image|max:2048',
         ]);
+
+    if ($request->hasFile('cover_image')) {
+        $path = $request->file('cover_image')->store('covers', 'public');
+        $validated['cover_image_url'] = $path;
+    }
+
+        unset($validated['cover_image']);
+
         $series->update($validated);
 
         return redirect()->route('series.index')->with('success','作品を更新しました');

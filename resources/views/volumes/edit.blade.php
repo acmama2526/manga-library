@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="flex space-x-2">
-                        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md">更新する</button>
+                        <button type="submit" class="bg-brand-600 text-white px-4 py-2 rounded-md">更新する</button>
                         <a href="{{ route('volumes.index') }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">キャンセル</a>
                     </div>
                 </form>
