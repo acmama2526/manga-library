@@ -13,7 +13,7 @@ class PlatformSeeder extends Seeder
      */
     public function run(): void
     {
-        $platforms = ['DMMブックス', 'めちゃコミック', 'コミックシーモア', 'ピッコマ', 'Renta！', '少年ジャンプ+','ebookjapan','楽天kobo','ブックライブ'];
+        $platforms = ['Kindle', 'DMMブックス', 'めちゃコミック', 'コミックシーモア', 'ピッコマ', 'Renta！', '少年ジャンプ+', 'ebookjapan', '楽天kobo', 'ブックライブ'];
 
         foreach($platforms as $name){
             Platform::firstOrCreate(['name'=>$name]);
